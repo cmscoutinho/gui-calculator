@@ -28,7 +28,7 @@ public class Calculator extends JFrame implements ActionListener {
             throw new RuntimeException(e);
         }
         setTitle("Calculator");
-        setSize(400, 500);
+        setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(20,20));
 
@@ -41,16 +41,16 @@ public class Calculator extends JFrame implements ActionListener {
         panel.setLayout(new GridLayout(4, 5, 20, 20));
         add(panel, BorderLayout.CENTER);
 
-        button = new JButton[16];
+        button = new JButton[20];
 
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 20; i++) {
             button[i] = new JButton(buttons[i]);
             button[i].setFont(new Font("Arial", Font.PLAIN, 24));
             button[i].addActionListener(this);
             panel.add(button[i]);
         }
 
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         this.setLocationRelativeTo(null);
         setVisible(true);
     }
