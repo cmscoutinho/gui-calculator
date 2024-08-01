@@ -64,9 +64,11 @@ public class Calculator extends JFrame implements ActionListener {
             if(!text.contains(".") || !command.equals(".")) {
                 display.setText(text + command);
             }
-            //display.setText(command);
         } else if(isOperand(command)) {
-            display.setText(command);
+            operand1 = display.getText();
+        } else if(isFunction(command)) {
+            operand1 = display.getText();
+            display.setText(String.valueOf(getFunctionValue(command, operand1)));
         }
 
 //        if ((command.charAt(0) >= '0' && command.charAt(0) <= '9') || command.equals(".")) {
@@ -108,16 +110,29 @@ public class Calculator extends JFrame implements ActionListener {
 //        }
     }
 
+    private double getFunctionValue(String command, String operand) {
+        if(command.equals("Sin"))
+            return Math.sin(Double.valueOf(operand));
+        if(command.equals("Cos"))
+            return Math.cos(Double.valueOf(operand));
+        if(command.equals("Tan"))
+            return Math.tan(Double.valueOf(operand));
+        return 0.0;
+    }
+
+    private boolean isFunction(String command) {
+        return  command.equals("Cos") ||
+                command.equals("Sin") ||
+                command.equals("Tan") ||
+                command.equals("CE");
+    }
+
     private boolean isOperand(String command) {
         return command.equals("+")    ||
                 command.equals("-")   ||
                 command.equals("*")   ||
                 command.equals("/")   ||
-                command.equals("=")   ||
-                command.equals("Cos") ||
-                command.equals("Sin") ||
-                command.equals("Tan") ||
-                command.equals("CE");
+                command.equals("=");
     }
 
     private boolean isNumber(String command) {
