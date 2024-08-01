@@ -60,7 +60,10 @@ public class Calculator extends JFrame implements ActionListener {
         String command = e.getActionCommand();
 
         if(isNumber(command)) {
-            display.setText(display.getText() + command);
+            String text = display.getText();
+            if(!text.contains(".")) {
+                display.setText(display.getText() + command);
+            }
             //display.setText(command);
         } else if(isOperand(command)) {
             display.setText(command);
