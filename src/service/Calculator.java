@@ -59,42 +59,65 @@ public class Calculator extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
 
-        if ((command.charAt(0) >= '0' && command.charAt(0) <= '9') || command.equals(".")) {
-            if (!isOperatorPressed) {
-                operand1 += command;
-                display.setText(operand1);
-            } else {
-                operand2 += command;
-                display.setText(operand2);
-            }
-        } else if (command.equals("=")) {
-            double result = 0;
-            double num1 = Double.parseDouble(operand1);
-            double num2 = Double.parseDouble(operand2);
-
-            switch (operator) {
-                case "/":
-                    result = num1 / num2;
-                    break;
-                case "*":
-                    result = num1 * num2;
-                    break;
-                case "-":
-                    result = num1 - num2;
-                    break;
-                case "+":
-                    result = num1 + num2;
-                    break;
-            }
-            display.setText(String.valueOf(result));
-            operand1 = String.valueOf(result);
-            operand2 = "";
-            isOperatorPressed = false;
-        } else {
-            if (!operand1.equals("")) {
-                operator = command;
-                isOperatorPressed = true;
-            }
+        if(isNumber(command)) {
+            display.setText(display.getText() + command);
+            //display.setText(command);
+        } else if(isOperand(command)) {
+            display.setText(command);
         }
+
+//        if ((command.charAt(0) >= '0' && command.charAt(0) <= '9') || command.equals(".")) {
+//            if (!isOperatorPressed) {
+//                operand1 += command;
+//                display.setText(operand1);
+//            } else {
+//                operand2 += command;
+//                display.setText(operand2);
+//            }
+//        } else if (command.equals("=")) {
+//            double result = 0;
+//            double num1 = Double.parseDouble(operand1);
+//            double num2 = Double.parseDouble(operand2);
+//
+//            switch (operator) {
+//                case "/":
+//                    result = num1 / num2;
+//                    break;
+//                case "*":
+//                    result = num1 * num2;
+//                    break;
+//                case "-":
+//                    result = num1 - num2;
+//                    break;
+//                case "+":
+//                    result = num1 + num2;
+//                    break;
+//            }
+//            display.setText(String.valueOf(result));
+//            operand1 = String.valueOf(result);
+//            operand2 = "";
+//            isOperatorPressed = false;
+//        } else {
+//            if (!operand1.equals("")) {
+//                operator = command;
+//                isOperatorPressed = true;
+//            }
+//        }
+    }
+
+    private boolean isOperand(String command) {
+        return command.equals("+")    ||
+                command.equals("-")   ||
+                command.equals("*")   ||
+                command.equals("/")   ||
+                command.equals("=")   ||
+                command.equals("Cos") ||
+                command.equals("Sin") ||
+                command.equals("Tan") ||
+                command.equals("CE");
+    }
+
+    private boolean isNumber(String command) {
+        return command.charAt(0) >= '0' && command.charAt(0) <= '9' || command.equals(".");
     }
 }
