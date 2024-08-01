@@ -9,10 +9,10 @@ public class Calculator extends JFrame implements ActionListener {
     private JTextField display;
     private JPanel panel;
     private String[] buttons = {
-            "7", "8", "9", "/",
-            "4", "5", "6", "*",
-            "1", "2", "3", "-",
-            "0", ".", "=", "+"
+            "7", "8", "9", "/", "Sin",
+            "4", "5", "6", "*", "Cos",
+            "1", "2", "3", "-", "Tan",
+            "0", ".", "=", "+", "CE"
     };
     private JButton[] button;
     private String operand1 = "";
