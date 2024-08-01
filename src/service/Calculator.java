@@ -27,18 +27,18 @@ public class Calculator extends JFrame implements ActionListener {
                  UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
-        setTitle("Calculadora");
+        setTitle("Calculator");
         setSize(400, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10,10));
 
         display = new JTextField();
-        display.setEditable(false);
+        display.setEditable(true);
         display.setFont(new Font("Arial", Font.PLAIN, 24));
         add(display, BorderLayout.NORTH);
 
         panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 4, 10, 10));
+        panel.setLayout(new GridLayout(4, 4, 20, 20));
         add(panel, BorderLayout.CENTER);
 
         button = new JButton[16];
