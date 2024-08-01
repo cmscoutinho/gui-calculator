@@ -30,7 +30,7 @@ public class Calculator extends JFrame implements ActionListener {
         setTitle("Calculator");
         setSize(400, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout(10,10));
+        setLayout(new BorderLayout(20,20));
 
         display = new JTextField();
         display.setEditable(true);
@@ -38,7 +38,7 @@ public class Calculator extends JFrame implements ActionListener {
         add(display, BorderLayout.NORTH);
 
         panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 4, 20, 20));
+        panel.setLayout(new GridLayout(4, 5, 20, 20));
         add(panel, BorderLayout.CENTER);
 
         button = new JButton[16];
@@ -50,6 +50,7 @@ public class Calculator extends JFrame implements ActionListener {
             panel.add(button[i]);
         }
 
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         setVisible(true);
     }
