@@ -66,6 +66,9 @@ public class Calculator extends JFrame implements ActionListener {
             }
         } else if(isOperand(command)) {
             operand1 = display.getText();
+            if(is Operator Pressed) {
+                // To be implemented
+            } 
         } else if(isFunction(command)) {
             operand1 = display.getText();
             display.setText(String.valueOf(getFunctionValue(command, operand1)));
