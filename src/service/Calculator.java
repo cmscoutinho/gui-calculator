@@ -64,13 +64,14 @@ public class Calculator extends JFrame implements ActionListener {
             if(!text.contains(".") || !command.equals(".")) {
                 display.setText(text + command);
             }
-        } else if(isOperand(command)) {
             operand1 = display.getText();
-            if(is Operator Pressed) {
-                // To be implemented
+        } else if(isOperator(command)) {
+            if(!isOperatorPressed) {
+                operand1 = display.getText();
+                isOperatorPressed = true;
+                display.setText("");
             } 
         } else if(isFunction(command)) {
-            operand1 = display.getText();
             display.setText(String.valueOf(getFunctionValue(command, operand1)));
         }
 
@@ -130,7 +131,7 @@ public class Calculator extends JFrame implements ActionListener {
                 command.equals("CE");
     }
 
-    private boolean isOperand(String command) {
+    private boolean isOperator(String command) {
         return command.equals("+")    ||
                 command.equals("-")   ||
                 command.equals("*")   ||
