@@ -15,8 +15,8 @@ public class Calculator extends JFrame implements ActionListener {
             "0", ".", "=", "+", "CE"
     };
     private JButton[] button;
-    private String operand1 = "";
-    private String operand2 = "";
+    private String operand1 = "0";
+    private String operand2 = "0";
     private String operator = "";
     private boolean isOperatorPressed = false;
 
@@ -35,6 +35,7 @@ public class Calculator extends JFrame implements ActionListener {
         display = new JTextField();
         display.setEditable(true);
         display.setFont(new Font("Arial", Font.PLAIN, 24));
+        display.setText("0");
         add(display, BorderLayout.NORTH);
 
         panel = new JPanel();
@@ -63,6 +64,8 @@ public class Calculator extends JFrame implements ActionListener {
             String text = display.getText();
             if(!text.contains(".") || !command.equals(".")) {
                 display.setText(text + command);
+            } else if(text.charAt(0) == '0') {
+                display.setText(command);
             }
             operand1 = display.getText();
         } else if(isOperator(command)) {
