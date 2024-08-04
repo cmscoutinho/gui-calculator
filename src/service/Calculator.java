@@ -30,7 +30,7 @@ public class Calculator extends JFrame implements ActionListener {
         setTitle("Calculator");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout(20,20));
+        setLayout(new BorderLayout(20, 20));
 
         display = new JTextField();
         display.setEditable(true);
@@ -59,22 +59,27 @@ public class Calculator extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
+        String text = display.getText();
 
-        if(isNumber(command)) {
-            String text = display.getText();
-            if(!text.contains(".") || !command.equals(".")) {
+        if (isNumber(command)) {
+            if (command.equals(".")) {
+                if (!text.contains("."))
+                    display.setText(text + command);
+            } else if () {
+
+            }
+
+            if (!text.contains(".") || !command.equals(".")) {
                 display.setText(text + command);
-            } else if(text.charAt(0) == '0') {
-                display.setText(command);
             }
             operand1 = display.getText();
-        } else if(isOperator(command)) {
-            if(!isOperatorPressed) {
+        } else if (isOperator(command)) {
+            if (!isOperatorPressed) {
                 operand1 = display.getText();
                 isOperatorPressed = true;
                 display.setText("");
-            } 
-        } else if(isFunction(command)) {
+            }
+        } else if (isFunction(command)) {
             display.setText(String.valueOf(getFunctionValue(command, operand1)));
         }
 
@@ -118,31 +123,31 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     private double getFunctionValue(String command, String operand) {
-        if(command.equals("Sin"))
+        if (command.equals("Sin"))
             return Math.sin(Double.valueOf(operand));
-        if(command.equals("Cos"))
+        if (command.equals("Cos"))
             return Math.cos(Double.valueOf(operand));
-        if(command.equals("Tan"))
+        if (command.equals("Tan"))
             return Math.tan(Double.valueOf(operand));
         return 0.0;
     }
 
     private boolean isFunction(String command) {
-        return  command.equals("Cos") ||
+        return command.equals("Cos") ||
                 command.equals("Sin") ||
                 command.equals("Tan") ||
                 command.equals("CE");
     }
 
     private boolean isOperator(String command) {
-        return command.equals("+")    ||
-                command.equals("-")   ||
-                command.equals("*")   ||
-                command.equals("/")   ||
+        return command.equals("+") ||
+                command.equals("-") ||
+                command.equals("*") ||
+                command.equals("/") ||
                 command.equals("=");
     }
 
     private boolean isNumber(String command) {
-        return command.charAt(0) >= '0' && command.charAt(0) <= '9' || command.equals(".");
+        return (command.charAt(0) >= '0' && command.charAt(0) <= '9') || command.equals(".");
     }
 }
