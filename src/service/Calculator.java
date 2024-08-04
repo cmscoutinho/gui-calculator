@@ -65,13 +65,13 @@ public class Calculator extends JFrame implements ActionListener {
             if (command.equals(".")) {
                 if (!text.contains("."))
                     display.setText(text + command);
-            } else if () {
-
+            } else if (text.charAt(0) == '0') {
+                display.setText(command);
             }
-
-            if (!text.contains(".") || !command.equals(".")) {
-                display.setText(text + command);
-            }
+//
+//            if (!text.contains(".") || !command.equals(".")) {
+//                display.setText(text + command);
+//            }
             operand1 = display.getText();
         } else if (isOperator(command)) {
             if (!isOperatorPressed) {
