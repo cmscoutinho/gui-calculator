@@ -35,7 +35,7 @@ public class Calculator extends JFrame implements ActionListener {
         display = new JTextField();
         display.setEditable(true);
         display.setFont(new Font("Arial", Font.PLAIN, 24));
-        display.setText("0");
+//        display.setText("0");
         add(display, BorderLayout.NORTH);
 
         panel = new JPanel();
@@ -61,62 +61,27 @@ public class Calculator extends JFrame implements ActionListener {
         String command = e.getActionCommand();
         String text = display.getText();
 
-        if(isNumber(command)) {
-            if(text.charAt(0) == '0' && !text.contains(".")) {
-                display.setText(command);
-            } else {
-                display.setText(text + command);
-            }
-            operand1 = display.getText();
-        } else if(isPoint(command) && !text.contains(".")) {
+        if (isNumber(command) || (isPoint(command) && !text.contains("."))) {
             display.setText(text + command);
         } else if (isOperator(command)) {
             if (!isOperatorPressed) {
                 operand1 = display.getText();
+                if(operand1.endsWith(".")) {
+                    operand1 += "0";
+                }
                 isOperatorPressed = true;
                 display.setText("");
+            } else if (!text.equals("")) {
+                operand2 = display.getText();
+                if(operand2.endsWith(".")) {
+                    operand2 += "0";
+                }
             }
         } else if (isFunction(command)) {
             display.setText(String.valueOf(getFunctionValue(command, operand1)));
+        } else if (command.equals("CE")) {
+            display.setText("");
         }
-
-//        if ((command.charAt(0) >= '0' && command.charAt(0) <= '9') || command.equals(".")) {
-//            if (!isOperatorPressed) {
-//                operand1 += command;
-//                display.setText(operand1);
-//            } else {
-//                operand2 += command;
-//                display.setText(operand2);
-//            }
-//        } else if (command.equals("=")) {
-//            double result = 0;
-//            double num1 = Double.parseDouble(operand1);
-//            double num2 = Double.parseDouble(operand2);
-//
-//            switch (operator) {
-//                case "/":
-//                    result = num1 / num2;
-//                    break;
-//                case "*":
-//                    result = num1 * num2;
-//                    break;
-//                case "-":
-//                    result = num1 - num2;
-//                    break;
-//                case "+":
-//                    result = num1 + num2;
-//                    break;
-//            }
-//            display.setText(String.valueOf(result));
-//            operand1 = String.valueOf(result);
-//            operand2 = "";
-//            isOperatorPressed = false;
-//        } else {
-//            if (!operand1.equals("")) {
-//                operator = command;
-//                isOperatorPressed = true;
-//            }
-//        }
     }
 
     private boolean isPoint(String command) {
@@ -136,8 +101,7 @@ public class Calculator extends JFrame implements ActionListener {
     private boolean isFunction(String command) {
         return command.equals("Cos") ||
                 command.equals("Sin") ||
-                command.equals("Tan") ||
-                command.equals("CE");
+                command.equals("Tan");
     }
 
     private boolean isOperator(String command) {
