@@ -66,24 +66,33 @@ public class Calculator extends JFrame implements ActionListener {
         } else if (isOperator(command)) {
             if (!isOperatorPressed) {
                 operand1 = display.getText();
-                if(operand1.endsWith(".")) {
+                if (operand1.endsWith(".")) {
                     operand1 += "0";
                 }
                 isOperatorPressed = true;
                 display.setText("");
             } else if (!text.equals("")) {
                 operand2 = display.getText();
-                if(operand2.endsWith(".")) {
+                if (operand2.endsWith(".")) {
                     operand2 += "0";
                 }
             }
         } else if (isFunction(command)) {
             display.setText(String.valueOf(getFunctionValue(command, operand1)));
+        } else if (command.equals("=")) {
+            double res = getOperatorValue(command, operand1, operand2);
+            display.setText(String.valueOf(res));
+            JOptionPane.showMessageDialog(null, operand1 + "\n" + operand2 + "\n" + String.valueOf(res));
+            resetAll();
         } else if (command.equals("CE")) {
             display.setText("");
-            operand1 = operand2 = "";
-            isOperatorPressed = false;
+            resetAll();
         }
+    }
+
+    private void resetAll() {
+        operand1 = operand2 = "0";
+        isOperatorPressed = false;
     }
 
     private boolean isPoint(String command) {
@@ -125,8 +134,7 @@ public class Calculator extends JFrame implements ActionListener {
         return command.equals("+") ||
                 command.equals("-") ||
                 command.equals("*") ||
-                command.equals("/") ||
-                command.equals("=");
+                command.equals("/");
     }
 
     private boolean isNumber(String command) {
