@@ -81,11 +81,28 @@ public class Calculator extends JFrame implements ActionListener {
             display.setText(String.valueOf(getFunctionValue(command, operand1)));
         } else if (command.equals("CE")) {
             display.setText("");
+            operand1 = operand2 = "";
+            isOperatorPressed = false;
         }
     }
 
     private boolean isPoint(String command) {
         return command.equals(".");
+    }
+
+    private double getOperatorValue(String command, String operand1, String operand2) {
+        double op1 = Double.valueOf(operand1);
+        double op2 = Double.valueOf(operand2);
+
+        if (command.equals("+"))
+            return op1 + op2;
+        if (command.equals("-"))
+            return op1 - op2;
+        if (command.equals("*"))
+            return op1 * op2;
+        if (command.equals("/"))
+            return op1 / op2;
+        return 0.0;
     }
 
     private double getFunctionValue(String command, String operand) {
