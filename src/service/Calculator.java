@@ -61,18 +61,15 @@ public class Calculator extends JFrame implements ActionListener {
         String command = e.getActionCommand();
         String text = display.getText();
 
-        if (isNumber(command)) {
-            if (command.equals(".")) {
-                if (!text.contains("."))
-                    display.setText(text + command);
-            } else if (text.charAt(0) == '0') {
+        if(isNumber(command)) {
+            if(text.charAt(0) == '0' && !text.contains(".")) {
                 display.setText(command);
+            } else {
+                display.setText(text + command);
             }
-//
-//            if (!text.contains(".") || !command.equals(".")) {
-//                display.setText(text + command);
-//            }
             operand1 = display.getText();
+        } else if(isPoint(command) && !text.contains(".")) {
+            display.setText(text + command);
         } else if (isOperator(command)) {
             if (!isOperatorPressed) {
                 operand1 = display.getText();
@@ -122,6 +119,10 @@ public class Calculator extends JFrame implements ActionListener {
 //        }
     }
 
+    private boolean isPoint(String command) {
+        return command.equals(".");
+    }
+
     private double getFunctionValue(String command, String operand) {
         if (command.equals("Sin"))
             return Math.sin(Double.valueOf(operand));
@@ -148,6 +149,6 @@ public class Calculator extends JFrame implements ActionListener {
     }
 
     private boolean isNumber(String command) {
-        return (command.charAt(0) >= '0' && command.charAt(0) <= '9') || command.equals(".");
+        return (command.charAt(0) >= '0' && command.charAt(0) <= '9');
     }
 }
