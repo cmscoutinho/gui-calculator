@@ -18,6 +18,7 @@ public class Calculator extends JFrame implements ActionListener {
     private String operand1 = "0";
     private String operand2 = "0";
     private String operator = "";
+    private String activeOperator = "";
     private boolean isOperatorPressed = false;
 
     public Calculator() {
@@ -64,6 +65,7 @@ public class Calculator extends JFrame implements ActionListener {
         if (isNumber(command) || (isPoint(command) && !text.contains("."))) {
             display.setText(text + command);
         } else if (isOperator(command)) {
+            activeOperator = command;
             if (!isOperatorPressed) {
                 operand1 = display.getText();
                 if (operand1.endsWith(".")) {
@@ -80,10 +82,12 @@ public class Calculator extends JFrame implements ActionListener {
         } else if (isFunction(command)) {
             display.setText(String.valueOf(getFunctionValue(command, operand1)));
         } else if (command.equals("=")) {
-            double res = getOperatorValue(command, operand1, operand2);
-            display.setText(String.valueOf(res));
-            JOptionPane.showMessageDialog(null, operand1 + "\n" + operand2 + "\n" + String.valueOf(res));
-            resetAll();
+            if(isOperatorPressed) {
+                operand2 = display.getText();
+                double res = getOperatorValue(activeOperator, operand1, operand2);
+                display.setText(String.valueOf(res));
+                resetAll();
+            }
         } else if (command.equals("CE")) {
             display.setText("");
             resetAll();
@@ -92,6 +96,7 @@ public class Calculator extends JFrame implements ActionListener {
 
     private void resetAll() {
         operand1 = operand2 = "0";
+        activeOperator = "";
         isOperatorPressed = false;
     }
 
