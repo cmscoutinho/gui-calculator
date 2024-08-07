@@ -34,6 +34,7 @@ public class Calculator extends JFrame implements ActionListener {
         setLayout(new BorderLayout(20, 20));
 
         display = new JTextField();
+        display.setHorizontalAlignment(SwingConstants.RIGHT);
         display.setEditable(true);
         display.setFont(new Font("Arial", Font.PLAIN, 24));
 //        display.setText("0");
