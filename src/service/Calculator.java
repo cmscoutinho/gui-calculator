@@ -28,7 +28,7 @@ public class Calculator extends JFrame implements ActionListener {
                  UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
-        setTitle("Simple Calculator v1.0");
+        setTitle("Simple Calculator v1.5");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(20, 20));
